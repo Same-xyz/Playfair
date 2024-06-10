@@ -51,3 +51,16 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+td {
+    border: 1px solid #000;
+    padding: 10px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}

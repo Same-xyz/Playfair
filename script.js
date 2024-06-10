@@ -1,25 +1,21 @@
 function encrypt() {
     let plaintext = document.getElementById('plaintext').value;
     let key = document.getElementById('key').value;
-    let ciphertext = playfairEncrypt(plaintext, key);
+    let matrix = generateMatrix(key);
+    displayMatrix(matrix); // Display the generated matrix
+    let ciphertext = playfairEncrypt(plaintext, matrix);
     document.getElementById('ciphertext').value = ciphertext;
 }
 
-function playfairEncrypt(plaintext, key) {
-    // Clean and prepare the key and plaintext
-    key = key.replace(/j/g, 'i').toUpperCase().replace(/[^A-Z]/g, '');
+function playfairEncrypt(plaintext, matrix) {
+    // Clean and prepare the plaintext
     plaintext = plaintext.replace(/j/g, 'i').toUpperCase().replace(/[^A-Z]/g, '');
 
-    // Generate the 5x5 key matrix
-    let matrix = generateMatrix(key);
-    console.log('Matrix:', matrix); // Debugging line
     let pairs = createPairs(plaintext);
-    console.log('Pairs:', pairs); // Debugging line
     let ciphertext = '';
 
     // Encrypt each pair
     pairs.forEach(pair => {
-        console.log('Encrypting pair:', pair); // Debugging line
         let pos1 = findPosition(pair[0], matrix);
         let pos2 = findPosition(pair[1], matrix);
 
@@ -39,13 +35,14 @@ function playfairEncrypt(plaintext, key) {
 }
 
 function generateMatrix(key) {
+    key = key.replace(/j/g, 'i').toUpperCase().replace(/[^A-Z]/g, '');
     let alphabet = 'ABCDEFGHIKLMNOPQRSTUVWXYZ'; // J is typically merged with I
     let keyString = key + alphabet;
     let seen = new Set();
     let matrix = [];
 
     for (let char of keyString) {
-        if (!seen.has(char)) {
+        if (!seen.has(char) && matrix.flat().length < 25) { // Ensure only 25 characters
             seen.add(char);
             if (matrix.length === 0 || matrix[matrix.length - 1].length === 5) {
                 matrix.push([]);
@@ -54,7 +51,6 @@ function generateMatrix(key) {
         }
     }
 
-    console.log('Generated matrix:', matrix); // Debugging line
     return matrix;
 }
 
@@ -75,7 +71,6 @@ function createPairs(text) {
         }
     }
 
-    console.log('Generated pairs:', pairs); // Debugging line
     return pairs;
 }
 
@@ -87,6 +82,23 @@ function findPosition(char, matrix) {
             }
         }
     }
-    console.error(`Character ${char} not found in matrix`); // Debugging line
     return null;
+}
+
+function displayMatrix(matrix) {
+    let container = document.getElementById('matrix-container');
+    container.innerHTML = ''; // Clear any previous matrix
+
+    let table = document.createElement('table');
+    for (let row of matrix) {
+        let tr = document.createElement('tr');
+        for (let char of row) {
+            let td = document.createElement('td');
+            td.textContent = char;
+            tr.appendChild(td);
+        }
+        table.appendChild(tr);
+    }
+
+    container.appendChild(table);
 }
