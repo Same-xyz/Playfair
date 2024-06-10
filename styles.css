@@ -12,6 +12,9 @@ body {
     /* background-image: url(https://images.pexels.com/photos/7319077/pexels-photo-7319077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1); */
     background-repeat: no-repeat;
     background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
 .container {
     background-color: #67868f;
@@ -20,7 +23,26 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    margin-top: 300px;
 }
+article h3{
+    margin-top: 0;
+}
+#matrix-container{
+    margin-bottom: 10px;
+}
+.card{
+    background-color: #7a2626;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow:0 0 15px rgba(0, 0, 0, 0.1) ;
+    color: white;
+    text-align: center;
+    width: ;
+    align-self: center;
+    justify-content: center;
+}
+
 h3{
     color: white;
 }

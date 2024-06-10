@@ -27,7 +27,25 @@
         <button onclick="encrypt()">Encrypt</button>
         <h2>Generated Matrix</h2>
         <div id="matrix-container"></div> <!-- Placeholder for the matrix table -->
-
+        <article class="card">
+            <h3>Playfair cipher rules</h3>
+            <ol>
+                <li class="rule one">
+                    <p><em>Generate a 5x5 Matrix</em>: The matrix is filled with letters from the key followed by the remaining letters of the alphabet. The letter 'J' is usually omitted or merged with 'I'.</p>
+                    <p><em>Handling Repeated Letters</em>: If the key contains repeated letters, they are ignored in subsequent appearances.</p>
+                </li>
+                <li class="rule two">
+                    <p><em>Replace 'J' with 'I'</em>: All occurrences of the letter 'J' are replaced with 'I'.</p>
+                    <p><em>Divide into Digraphs</em>:Split the plaintext into pairs of letters (digraphs). If there is an odd number of letters, add a filler letter, usually 'X'.</p>
+                    <p><em>Handle Repeated Letters in Digraphs</em>: If a digraph consists of the same letter (e.g., "LL"), replace the second letter with a filler letter (e.g., "LX").</p>
+                </li>
+                <li class="rule two">
+                    <p><em>Letters in the Same Row</em>: Replace each letter with the letter immediately to its right, wrapping around to the beginning of the row if necessary.</p>
+                    <p><em>Letters in the Same Column</em>: Replace each letter with the letter immediately below it, wrapping around to the top of the column if necessary.</p>
+                    <p><em>Letters in Different Rows and Columns</em>: Form a rectangle with the two letters and replace each letter with the letter on the same row but in the column of the other letter.</p>
+                </li>
+            </ol>
+        </article>
     </div>
     <script src="script.js"></script>
 </body>
